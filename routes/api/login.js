@@ -22,6 +22,7 @@ const {
 router.get('/', auth, async (req, res, next) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
+        console.log(req.user)
         res.json(user);
     } catch (err) {
         console.error(err)
@@ -69,6 +70,7 @@ router.post('/', [
                 id: user.id
             }
         }
+        // console.log(`${req.user.id}`)
         jwt.sign(payload,
             jwtToken, {
                 expiresIn: 3600000

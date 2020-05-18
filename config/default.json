@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://anish:sso2019@cluster0-mgvpo.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtToken": "myjwdtokenAf"
+}

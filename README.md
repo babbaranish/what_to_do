@@ -1,4 +1,4 @@
-#What ToDo
+# What ToDo
 
 ### What ToDo is a ToDo list app which is created using MERN Stack.
 

@@ -142,4 +142,34 @@ router.put('/:id', auth, check('todo', 'Enter some text').exists(),
         }
     })
 
+/**
+ * @PRIVATE_UPDATE_API
+ * ! api/todos
+ * @description set isCompleted to True of Todo with specifice ID 
+ */
+
+router.patch('/:id', auth, async (req, res, next) => {
+    try {
+        const toDoId = req.params.id;
+        const todo = await Todo.findOneAndUpdate({
+            _id: toDoId
+        }, {
+            $set: {
+                isCompleted: req.body.isCompleted || false,
+                isActive: req.body.isActive || true
+            }
+        })
+        if (!todo) {
+            return res.status(400).json({
+                msg: "No todo found"
+            })
+        }
+        res.json({
+            msg: "updated successfully"
+        })
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('server error');
+    }
+})
 module.exports = router;

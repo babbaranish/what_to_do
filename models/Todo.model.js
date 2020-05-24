@@ -1,24 +1,34 @@
 const mongoose = require("mongoose");
-const TodoSchema = mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+
+const TodoSchema = mongoose.Schema(
+    {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+        },
+        todo: {
+            type: String,
+            required: true,
+        },
+        isCompleted: {
+            type: Boolean,
+            default: false,
+        },
+        isActive: {
+            type: Boolean,
+            default: true,
+        },
+        deleteWhen: {
+            type: Date,
+            required: true,
+        }, // you don't need to set this default, but I like it there for semantic clearness
     },
-    todo: {
-        type: String,
-        required: true
+    {
+        timestamps: {
+            createdAt: "createdAt",
+            updatedAt: "",
+        },
     },
-    isCompleted: {
-        type: Boolean,
-        default: false
-    },
-    isActive: {
-        type: Boolean,
-        default: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-})
-module.exports = Todos = mongoose.model('todo', TodoSchema);
+);
+TodoSchema.index({ deleteWhen: 1 }, { expireAfterSeconds: 10 });
+module.exports = Todos = mongoose.model("todo", TodoSchema);

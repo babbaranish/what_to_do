@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledButton = styled.button`
 	background-color: ${(props) => props.isColor};
@@ -9,6 +9,7 @@ export const StyledButton = styled.button`
 	border: none;
 	border-radius: 1px;
 	font-size: 1.1rem;
+	font-weight: bold;
 	&:hover {
 		cursor: pointer;
 		background-color: ${(props) => props.hoverColor};

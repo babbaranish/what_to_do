@@ -2,9 +2,9 @@ import React from "react";
 // import { ReactComponent as Background } from '../../assets/Vector1.svg';
 import { ReactComponent as Illustration } from "../../assets/to_do_list_2.svg";
 import CustomButton from "../custom-button/Custom-button.component";
+import Logo from "../logo/Logo.component";
 //Styles
 import {
-	Logo,
 	Heading,
 	Paragraph,
 	LeftContainer,
@@ -17,8 +17,8 @@ import { Link } from "react-router-dom";
 const GettingStarted = () => {
 	return (
 		<MainContainer>
+			<Logo color='#515154' />
 			<LeftContainer>
-				<Logo>What ToDo</Logo>
 				<Heading>
 					Stay on Track and Organize <br />
 					Your Life With What ToDo
@@ -29,7 +29,9 @@ const GettingStarted = () => {
 					Get Notification and Reminder to keep on track
 				</Paragraph>
 				<ButtonContainer>
-					<CustomButton>Signup Now</CustomButton>
+					<Link to='/signup'>
+						<CustomButton>Signup Now</CustomButton>
+					</Link>
 				</ButtonContainer>
 			</LeftContainer>
 

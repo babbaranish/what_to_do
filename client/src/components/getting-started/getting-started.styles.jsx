@@ -42,12 +42,3 @@ export const ButtonContainer = styled.div`
 	justify-content: center;
 	padding-top: 2em;
 `;
-
-export const Logo = styled.h1`
-	position: absolute;
-	top: 0.5em;
-	left: 9.6em;
-	color: #515154;
-	cursor: pointer;
-	font-weight: bold;
-`;

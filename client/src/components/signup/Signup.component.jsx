@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Logo from "../logo/Logo.component";
-import { Link, Route, Redirect, Switch } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 //components
 import CustomButton from "../custom-button/Custom-button.component";
 import FormInput from "../form-input/Form-input.component";
 import { register } from "../../redux/auth/auth.action";
-import PropTypes from "prop-types";
 //styles
 import {
 	SignupContainer,
@@ -17,9 +16,10 @@ import {
 	LoginPara,
 	LoginHeading,
 	LoginContainer,
+	ButtonContainer,
 } from "./signup.styles";
 
-const Signup = ({ register, auth }) => {
+const Signup = ({ register }) => {
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -81,26 +81,34 @@ const Signup = ({ register, auth }) => {
 						placeholder='Enter Your Password'
 						required
 					/>
-					<CustomButton>Sign up</CustomButton>
+					<CustomButton
+						isTextColor='#fff'
+						isColor='#5e5bd1'
+						isBorderColor='none'
+					>
+						Sign up
+					</CustomButton>
 				</form>
 			</LeftSignup>
 			<RightSignup>
 				<LoginContainer>
 					<LoginHeading>Already Have an Account?</LoginHeading>
 					<LoginPara>Click on Login to Access your Todos</LoginPara>
-					<Link to='/login'>
-						<CustomButton>Login</CustomButton>
-					</Link>
+					<ButtonContainer>
+						<Link to='/login'>
+							<CustomButton
+								isColor='#AFADEF'
+								isTextColor='#fff'
+								isBorderColor='#5e5bd1'
+							>
+								Login
+							</CustomButton>
+						</Link>
+					</ButtonContainer>
 				</LoginContainer>
 			</RightSignup>
 		</SignupContainer>
 	);
 };
 
-Signup.propTypes = {
-	auth: PropTypes.bool,
-};
-const mapStateToProps = (state) => ({
-	auth: state.auth.isAuthenticated,
-});
-export default connect(mapStateToProps, { register })(Signup);
+export default connect(null, { register })(Signup);

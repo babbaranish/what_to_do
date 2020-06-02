@@ -2,7 +2,6 @@ import styled from "styled-components";
 export const SignupContainer = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-
 	height: 100vh;
 `;
 export const LeftSignup = styled.section`
@@ -32,16 +31,23 @@ export const RightSignup = styled.section`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 `;
 export const LoginContainer = styled.div`
 	margin-top: -1em;
 `;
 export const LoginHeading = styled.h1`
+	font-size: 2em;
 	color: ghostwhite;
 `;
 
 export const LoginPara = styled.p`
 	color: ghostwhite;
 	font-size: 1.3em;
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
+`;
+
+export const ButtonContainer = styled.div`
+	display: flex;
+	justify-content: center;
 `;

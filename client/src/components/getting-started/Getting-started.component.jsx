@@ -30,7 +30,13 @@ const GettingStarted = () => {
 				</Paragraph>
 				<ButtonContainer>
 					<Link to='/signup'>
-						<CustomButton>Signup Now</CustomButton>
+						<CustomButton
+							isTextColor='#fff'
+							isColor='#5e5bd1'
+							isBorderColor='none'
+						>
+							Signup Now
+						</CustomButton>
 					</Link>
 				</ButtonContainer>
 			</LeftContainer>

@@ -9,4 +9,5 @@ export const StyledLogo = styled(Link)`
 	color: ${(props) => props.color} !important;
 	cursor: pointer;
 	font-weight: bold;
+	z-index: 999;
 `;

@@ -17,7 +17,6 @@ export const FormGroup = styled.div`
 export const Input = styled.input`
 	height: 40px;
 	border: 0.12em solid #777;
-
 	width: 50vh;
 	color: ${subColor};
 	padding: 10px;

@@ -17,7 +17,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "styled-icons": "^10.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

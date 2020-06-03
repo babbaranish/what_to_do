@@ -43,7 +43,7 @@ const Signup = ({ register }) => {
 	//redirect to homepage
 	const renderRedirect = () => {
 		if (redirect.redirect) {
-			return <Redirect to='/' />;
+			return <Redirect to='/dashboard' />;
 		}
 	};
 	return (

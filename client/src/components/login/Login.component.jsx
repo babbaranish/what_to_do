@@ -43,7 +43,7 @@ const Login = ({ login }) => {
 	};
 	const redirectRender = () => {
 		if (redirect.redirect) {
-			return <Redirect to='/' />;
+			return <Redirect to='/dashboard' />;
 		}
 	};
 	return (
@@ -101,7 +101,7 @@ const Login = ({ login }) => {
 						isColor='#5e5bd1'
 						isBorderColor='none'
 					>
-						Log In
+						Log In <i className='las la-sign-in-alt'></i>
 					</CustomButton>
 				</form>
 			</RightLogin>

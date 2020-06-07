@@ -8,7 +8,7 @@ export const SidebarContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	position: fixed;
-	z-index: -1;
+	z-index: 2;
 	background-color: #5c5aab;
 `;
 export const SidebarItemContainer = styled.ul`
@@ -26,6 +26,7 @@ export const SidebarItems = styled(Link)`
 	margin-top: 1.2em;
 	text-align: center;
 	cursor: pointer;
-	padding: 0.5em 2em 0.5em;
+	padding: 0.5em 0em 0.5em;
 	background-color: #9492de;
+	width: 10em;
 `;

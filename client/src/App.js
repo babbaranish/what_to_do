@@ -19,7 +19,7 @@ const App = () => {
 		if (localStorage.token) {
 			setAuthToken(localStorage.token);
 			store.dispatch(loadUser());
-			return <Redirect to='/' />;
+			return <Redirect to='/dashboard' />;
 		}
 	}, []);
 

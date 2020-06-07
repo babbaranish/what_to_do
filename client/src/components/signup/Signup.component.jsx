@@ -45,6 +45,9 @@ const Signup = ({ register }) => {
 		if (redirect.redirect) {
 			return <Redirect to='/dashboard' />;
 		}
+		if (localStorage.token) {
+			return <Redirect to='/dashboard' />;
+		}
 	};
 	return (
 		<SignupContainer>

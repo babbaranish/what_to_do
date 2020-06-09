@@ -1,14 +1,15 @@
 import {
 	GET_TODOS,
-	POST_ERROR,
 	TODO_CHECKED,
-	TODO_UNCHECKED,
 	TODO_CHECKED_FAIL,
+	DELETE_TODO,
+	DELETE_FAILED,
 } from "./todos.types";
 const initialState = {
 	todos: [],
 	loading: true,
 	error: {},
+	msg: [],
 };
 
 export default function (state = initialState, action) {
@@ -23,16 +24,18 @@ export default function (state = initialState, action) {
 			};
 
 		case TODO_CHECKED_FAIL:
+		case DELETE_FAILED:
 			return {
 				...state,
 				loading: false,
 				error: payload,
 			};
 		case TODO_CHECKED:
+		case DELETE_TODO:
 			return {
 				...state,
 				loading: false,
-				todos: payload,
+				msg: payload,
 			};
 		default:
 			return state;

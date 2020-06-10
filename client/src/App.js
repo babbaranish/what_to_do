@@ -19,7 +19,7 @@ const App = () => {
 		if (localStorage.token) {
 			setAuthToken(localStorage.token);
 			store.dispatch(loadUser());
-			// return <Redirect to='/dashboard' />;
+			return () => <Redirect to='/dashboard' />;
 		}
 	}, []);
 
@@ -38,6 +38,7 @@ const App = () => {
 								return <GettingStarted />;
 							}}
 						/>
+
 						<Route
 							path='/signup'
 							render={() => {
@@ -56,6 +57,7 @@ const App = () => {
 								return <Login />;
 							}}
 						/>
+
 						<Route path='/dashboard' component={Dashboard} />
 					</Switch>
 				</PersistGate>

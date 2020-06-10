@@ -4,7 +4,7 @@ import {
 	TODO_CHECKED,
 	TODO_CHECKED_FAIL,
 	DELETE_TODO,
-	DELETE_FAILED,
+	CREATE_TODO,
 } from "./todos.types";
 import axios from "axios";
 
@@ -70,6 +70,35 @@ export const deleteTodoAsync = ({ id }) => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: POST_ERROR,
+			payload: {
+				msg: err.response,
+			},
+		});
+	}
+};
+
+export const createTodo = (res) => ({
+	type: CREATE_TODO,
+	payload: res,
+});
+
+export const createTodoAsync = ({ todo, deleteWhen }) => async (dispatch) => {
+	try {
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		console.log(todo, deleteWhen);
+		const body = JSON.stringify({ todo, deleteWhen });
+
+		const res = await axios.post(`/api/todos`, body, config);
+		dispatch(createTodo(res.data));
+		const res1 = await axios.get("/api/todos");
+		dispatch(getTodos(res1.data));
+	} catch (err) {
+		dispatch({
+			type: TODO_CHECKED_FAIL,
 			payload: {
 				msg: err.response,
 			},

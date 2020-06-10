@@ -1,4 +1,5 @@
 export const CREATE_TODO = "CREATE_TODO";
+export const CREATE_FAILED = "CREATE_FAILED";
 export const GET_TODOS = "GET_TODOS";
 export const POST_ERROR = "POST_ERROR";
 export const TODO_CHECKED = "TODO_CHECKED";

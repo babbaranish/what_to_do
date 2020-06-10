@@ -33,10 +33,7 @@ const Todo = ({
 			return { ...prevState, isCompleted: e.target.checked };
 		}); //set checkbox state
 		const isCompleted = !state.isCompleted; //inverting value
-		console.log(e.target.checked);
 		const isActive = !isCompleted; //setting pending value to inverse of isComplete
-		console.log(`iscomple ${!isCompleted}`);
-		console.log(`isactive ${isActive}`);
 		setCheck((prevState) => {
 			return { ...prevState, isActive: isActive };
 		}); //setting pending value
@@ -45,7 +42,6 @@ const Todo = ({
 	//delete todo function
 	const handleDelete = (e) => {
 		e.preventDefault();
-		console.log(id);
 		deleteTodoAsync({ id });
 	};
 

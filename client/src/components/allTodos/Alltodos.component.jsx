@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { AllTodosContainer } from "./alltodos.styles";
 import { getTodosAsync } from "../../redux/todos/todos.action";
 import { connect } from "react-redux";
-
 import Todo from "../todo/Todo.component";
 
 const Alltodos = ({ getTodosAsync, todos: { todos } }) => {

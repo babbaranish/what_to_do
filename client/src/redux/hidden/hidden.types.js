@@ -1,1 +1,2 @@
 export const HIDE_TODO = "HIDE_TODO";
+export const UPDATE_HIDDEN_TODO = "UPDATE_HIDDEN_TODO";

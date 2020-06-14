@@ -130,6 +130,7 @@ router.put(
 				{
 					$set: {
 						todo: req.body.todo,
+						deleteWhen: req.body.deleteWhen,
 					},
 				},
 			);

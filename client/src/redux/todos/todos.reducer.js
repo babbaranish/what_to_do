@@ -5,6 +5,7 @@ import {
 	DELETE_TODO,
 	DELETE_FAILED,
 	CREATE_TODO,
+	UPDATE_TODO,
 } from "./todos.types";
 const initialState = {
 	todos: [],
@@ -35,6 +36,7 @@ export default function (state = initialState, action) {
 		case TODO_CHECKED:
 		case DELETE_TODO:
 		case CREATE_TODO:
+		case UPDATE_TODO:
 			return {
 				...state,
 				loading: false,

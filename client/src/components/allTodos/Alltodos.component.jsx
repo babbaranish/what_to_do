@@ -19,6 +19,7 @@ const Alltodos = ({ getTodosAsync, todos: { todos } }) => {
 						title={todo.todo}
 						isChecked={todo.isCompleted}
 						isPending={todo.isActive}
+						deleteAt={todo.deleteWhen}
 					/>
 				);
 			})}

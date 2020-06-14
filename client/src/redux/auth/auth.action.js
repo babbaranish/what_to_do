@@ -5,9 +5,17 @@ import {
 	AUTH_ERROR,
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
+	LOGOUT,
 } from "./auth.types";
 import axios from "axios";
 import setAuthToken from "./auth.util";
+const logout = () => ({
+	type: LOGOUT,
+});
+
+export const logoutAsync = () => (dispatch) => {
+	dispatch(logout());
+};
 
 export const loadUser = () => async (dispach) => {
 	if (localStorage.token) {
@@ -25,6 +33,7 @@ export const loadUser = () => async (dispach) => {
 		}
 	}
 };
+
 export const register = ({ name, email, password }) => async (dispatch) => {
 	const config = {
 		headers: {
@@ -66,13 +75,12 @@ export const login = ({ email, password }) => async (dispatch) => {
 			body,
 			config,
 		);
-		console.log(res);
+
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: res.data,
 		});
 		dispatch(loadUser());
-		console.log(res.data);
 	} catch (err) {
 		alert(err);
 		dispatch({

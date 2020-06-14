@@ -33,7 +33,7 @@ const Navbar = ({ hideTodo, hidden }) => {
 					<UserSettings>
 						<Link
 							to='/dashboard/settings'
-							className='las la-user-cog'
+							className='las la-sign-out-alt'
 						></Link>
 					</UserSettings>
 				</ButtonContainer>

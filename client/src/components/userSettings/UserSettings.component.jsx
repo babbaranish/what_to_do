@@ -1,6 +1,20 @@
 import React from "react";
 
-const UserSettings = () => {
-	return <div>UserSettings</div>;
+import { UserSettingsContainer } from "./UserSettings.styles";
+import { connect } from "react-redux";
+import { logoutAsync } from "../../redux/auth/auth.action";
+import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
+const UserSettings = ({ logoutAsync }) => {
+	return (
+		<UserSettingsContainer>
+			{logoutAsync()}
+			<Redirect to='/login' />
+		</UserSettingsContainer>
+	);
 };
-export default UserSettings;
+
+UserSettings.propTypes = {
+	logoutAsync: PropTypes.func.isRequired,
+};
+export default connect(null, { logoutAsync })(UserSettings);

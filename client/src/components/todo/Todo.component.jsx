@@ -26,6 +26,7 @@ const Todo = ({
 	updateHidden,
 	deleteAt,
 }) => {
+	const titleDate = new Date(deleteAt).toString().slice(0, 25);
 	const [state, setCheck] = useState({
 		isCompleted: isChecked,
 		isActive: isPending,
@@ -50,6 +51,7 @@ const Todo = ({
 	};
 	const handleUpdate = (e) => {
 		e.preventDefault();
+		console.log(titleDate);
 		showHideUpdateTodo();
 	};
 
@@ -69,7 +71,15 @@ const Todo = ({
 				/>
 				<Checkbox htmlFor={id}></Checkbox>
 			</CheckboxContainer>
-			<TitleContainer isAuth={isChecked}> {title}</TitleContainer>
+			<TitleContainer isAuth={isChecked}>
+				{" "}
+				<abbr
+					style={{ textDecoration: "none" }}
+					title={`This will be delete at ${titleDate}`}
+				>
+					{title}
+				</abbr>
+			</TitleContainer>
 			<EditContainer>
 				<EditButton onClick={handleUpdate}>
 					<i className='las la-edit'></i>

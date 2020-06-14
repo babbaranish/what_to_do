@@ -33,25 +33,20 @@ const Login = ({ login }) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 	//Login user and set the redirect state to true and redirect to homepage
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("test");
 		login({ email, password }); //login user
-		console.log("test");
-
 		setRedirect({ redirect: true });
-	};
-	const redirectRender = () => {
+		if (localStorage.getItem("token")) {
+			return <Redirect to='/dashboard' />;
+		}
 		if (redirect.redirect) {
 			return <Redirect to='/dashboard' />;
 		}
-		if (localStorage.token) {
-			return <Redirect to='/dashboard' />;
-		}
 	};
+
 	return (
 		<LoginContainer>
-			{redirectRender()}
 			<Logo color='#e9ebee' />
 			<LeftLogin>
 				<SignupContainer>

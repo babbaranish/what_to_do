@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { ReactComponent as Background } from '../../assets/Vector1.svg';
 import { ReactComponent as Illustration } from "../../assets/to_do_list_2.svg";
 import CustomButton from "../custom-button/Custom-button.component";
@@ -12,9 +12,15 @@ import {
 	RightContainer,
 	ButtonContainer,
 } from "./getting-started.styles";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const GettingStarted = () => {
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			console.log("1");
+			return <Redirect to='/dashboard' />;
+		}
+	}, []);
 	return (
 		<MainContainer>
 			<Logo color='#515154' />

@@ -11,6 +11,7 @@ const initialState = {
 	loading: true,
 	error: {},
 	msg: [],
+	hidden: true,
 };
 
 export default function (state = initialState, action) {
@@ -39,6 +40,7 @@ export default function (state = initialState, action) {
 				loading: false,
 				msg: payload,
 			};
+
 		default:
 			return state;
 	}

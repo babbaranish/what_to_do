@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormInput from "../form-input/Form-input.component";
 import CustomButton from "../custom-button/Custom-button.component";
 import {
@@ -12,12 +12,12 @@ import {
 } from "./createTodo.styles";
 import { connect } from "react-redux";
 import { createTodoAsync } from "../../redux/todos/todos.action";
+import { hideTodo } from "../../redux/hidden/hidden.action";
 
 import PropTypes from "prop-types";
-const CreateTodo = ({ createTodoAsync }) => {
+const CreateTodo = ({ createTodoAsync, hideTodo, hidden }) => {
 	//initial state
 	const [state, setState] = useState({
-		hidden: false,
 		todo: "",
 		deleteAt: new Date(),
 	});
@@ -28,6 +28,7 @@ const CreateTodo = ({ createTodoAsync }) => {
 			...state,
 			todo: e.target.value,
 		});
+		console.log(hidden);
 	};
 	//setting DatePicker State
 	const datePicker = (date) => {
@@ -39,14 +40,14 @@ const CreateTodo = ({ createTodoAsync }) => {
 		e.preventDefault();
 		const deleteWhen = deleteAt.toISOString();
 		createTodoAsync({ todo, deleteWhen });
-		setState({ ...state, hidden: true });
+		hideTodo();
 	};
 	//setting hidden state to true to close the modal
 	const closePopup = (e) => {
 		e.preventDefault();
-		setState({ ...state, hidden: true });
+		hideTodo();
 	};
-	const hidden = state.hidden;
+
 	return (
 		<CreateTodoContainer hidden={hidden}>
 			<BoxContainer>
@@ -88,7 +89,13 @@ const CreateTodo = ({ createTodoAsync }) => {
 		</CreateTodoContainer>
 	);
 };
+
 CreateTodo.propTypes = {
 	createTodoAsync: PropTypes.func.isRequired,
 };
-export default connect(null, { createTodoAsync })(CreateTodo);
+const mapStateToProp = (state) => ({
+	hidden: state.hidden,
+});
+export default connect(mapStateToProp, { createTodoAsync, hideTodo })(
+	CreateTodo,
+);

@@ -7,3 +7,4 @@ export const TODO_UNCHECKED = "TODO_UNCHECKED";
 export const TODO_CHECKED_FAIL = "TODO_CHECKED_FAIL";
 export const DELETE_TODO = "DELETE_TODO";
 export const DELETE_FAILED = "DELETE_FAILED";
+export const HIDE_TODO = "HIDE_TODO";

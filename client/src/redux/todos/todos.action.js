@@ -93,6 +93,7 @@ export const createTodoAsync = ({ todo, deleteWhen }) => async (dispatch) => {
 		const body = JSON.stringify({ todo, deleteWhen });
 
 		const res = await axios.post(`/api/todos`, body, config);
+
 		dispatch(createTodo(res.data));
 		const res1 = await axios.get("/api/todos");
 		dispatch(getTodos(res1.data));

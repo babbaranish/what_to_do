@@ -28,6 +28,7 @@ export const NavbarItems = styled.div`
 	margin: 0em 2em 0 0;
 	font-size: 1.5em;
 	color: ghostwhite;
+	flex-basis: 80%;
 `;
 
 export const NavbarSearch = styled.input`
@@ -40,6 +41,7 @@ export const NavbarSearch = styled.input`
 	margin: 1.1em 1em 0em 0em;
 	font-weight: bold;
 	background-color: #8987d6;
+	flex-basis: 84%;
 	width: 50em;
 	box-shadow: 1px -1px 5px 1px rgba(46, 45, 46, 0.1);
 	&:focus {
@@ -55,9 +57,44 @@ export const NavbarSearch = styled.input`
 	}
 `;
 
-export const UserSettings = styled.div`
-	margin-top: 0.45em;
-	font-weight: bold;
-	font-size: 30px;
-	text-transform: uppercase;
+export const UserSettings = styled.button`
+	background-color: transparent;
+	font-size: 1.3em;
+	border: none;
+	width: 55px;
+	height: 45px;
+	color: white;
+	padding-bottom: 3px;
+	&:hover {
+		cursor: pointer;
+		background-color: #8987d6;
+		border-radius: 8px;
+	}
+	&:focus {
+		outline: none;
+	}
+`;
+export const ButtonContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	flex-basis: 8%;
+	align-items: center;
+`;
+
+export const AddButton = styled.button`
+	background-color: transparent;
+	border: none;
+	color: white;
+	width: 55px;
+	height: 45px;
+	padding-top: 3px;
+
+	&:hover {
+		cursor: pointer;
+		background-color: #8987d6;
+		border-radius: 8px;
+	}
+	&:focus {
+		outline: none;
+	}
 `;

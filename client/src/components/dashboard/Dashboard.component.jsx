@@ -7,14 +7,13 @@ import UserSettings from "../userSettings/UserSettings.component";
 import Sidebar from "../sidebar/Sidebar.component";
 import Alltodos from "../allTodos/Alltodos.component";
 import { DashboardContainer } from "./dashboard.styles";
-import CreateTodo from "../createTodo/CreateTodo.component";
 
 const Dashboard = () => {
 	return (
 		<DashboardContainer>
 			<Navbar />
 			<Sidebar />
-			<CreateTodo />
+
 			<Route
 				exact
 				path='/dashboard/completed'

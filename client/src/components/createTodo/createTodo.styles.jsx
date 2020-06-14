@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import DateTimePicker from "react-datetime-picker";
 export const CreateTodoContainer = styled.div`
+	display: flex;
 	position: fixed;
 	z-index: 99;
 	left: 0;
@@ -9,7 +10,6 @@ export const CreateTodoContainer = styled.div`
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.4);
-	display: ${(props) => (props.hidden ? "none" : "flex")};
 	align-items: center;
 	justify-content: center;
 	&:focus ~ input {

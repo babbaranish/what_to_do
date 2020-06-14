@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { ReactComponent as Plus } from "../../assets/plus.svg";
+import { connect } from "react-redux";
+import { hideTodo } from "../../redux/hidden/hidden.action";
 //styles
 import {
 	StyledNav,
@@ -9,9 +11,12 @@ import {
 	NavbarItems,
 	NavbarSearch,
 	UserSettings,
+	AddButton,
+	ButtonContainer,
 } from "./navbar.styles";
+import CreateTodo from "../createTodo/CreateTodo.component";
 
-const Navbar = () => {
+const Navbar = ({ hideTodo, hidden }) => {
 	return (
 		<StyledNav>
 			<LogoContainer>
@@ -19,14 +24,25 @@ const Navbar = () => {
 			</LogoContainer>
 			<NavbarItems>
 				<NavbarSearch name='search' type='text' placeholder='Search' />
-				<UserSettings>
-					<Link
-						to='/dashboard/settings'
-						className='las la-user-cog'
-					></Link>
-				</UserSettings>
+				<ButtonContainer>
+					<AddButton onClick={hideTodo}>
+						<Plus />
+					</AddButton>
+				</ButtonContainer>
+				<ButtonContainer>
+					<UserSettings>
+						<Link
+							to='/dashboard/settings'
+							className='las la-user-cog'
+						></Link>
+					</UserSettings>
+				</ButtonContainer>
 			</NavbarItems>
+			{hidden ? null : <CreateTodo />}
 		</StyledNav>
 	);
 };
-export default Navbar;
+const mapStateToProps = (state) => ({
+	hidden: state.hidden.hidden,
+});
+export default connect(mapStateToProps, { hideTodo })(Navbar);

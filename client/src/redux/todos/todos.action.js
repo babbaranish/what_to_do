@@ -6,6 +6,8 @@ import {
 	DELETE_TODO,
 	CREATE_TODO,
 	UPDATE_TODO,
+	TEMP_VALUE,
+	DELETE_TEMP,
 } from "./todos.types";
 import axios from "axios";
 
@@ -137,4 +139,21 @@ export const updateTodoAsync = ({ todo, deleteWhen, id }) => async (
 			},
 		});
 	}
+};
+
+export const addTemp = (res) => ({
+	type: TEMP_VALUE,
+	payload: res,
+});
+
+export const asyncAddTemp = ({ title, id, deleteAt }) => (dispatch) => {
+	const res = { title, id, deleteAt };
+	dispatch(addTemp(res));
+};
+
+export const deleteTemp = () => ({
+	type: DELETE_TEMP,
+});
+export const asyncDeleteTemp = () => (dispatch) => {
+	dispatch(deleteTemp());
 };

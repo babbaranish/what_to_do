@@ -1,23 +1,23 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, withRouter } from "react-router-dom";
 import {
 	SidebarContainer,
 	SidebarItemContainer,
 	SidebarItems,
 } from "./sidebar.styles";
-const Sidebar = () => {
+const Sidebar = ({ match }) => {
 	let location = useLocation();
 	let path = location.pathname;
 	let all, completed, pending;
-	if (path == "/dashboard") {
+	if (path === "/dashboard") {
 		all = {
 			border: "2px solid #ffffff96",
 		};
-	} else if (path == "/dashboard/completed") {
+	} else if (path === "/dashboard/completed") {
 		completed = {
 			border: "2px solid #ffffff96",
 		};
-	} else if ("/dashboard/pending") {
+	} else if (path === "/dashboard/pending") {
 		pending = {
 			border: "2px solid #ffffff96",
 		};
@@ -25,17 +25,17 @@ const Sidebar = () => {
 	return (
 		<SidebarContainer>
 			<SidebarItemContainer>
-				<SidebarItems style={all} to='/dashboard'>
+				<SidebarItems style={all} to={`${match.path}`}>
 					All
 				</SidebarItems>
-				<SidebarItems style={pending} to='/dashboard/pending'>
+				<SidebarItems style={pending} to={`${match.path}/pending`}>
 					Pending
 				</SidebarItems>
-				<SidebarItems style={completed} to='/dashboard/completed'>
+				<SidebarItems style={completed} to={`${match.path}/completed`}>
 					Completed
 				</SidebarItems>
 			</SidebarItemContainer>
 		</SidebarContainer>
 	);
 };
-export default Sidebar;
+export default withRouter(Sidebar);

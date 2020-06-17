@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../logo/Logo.component";
-import { Link, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 //components
 import CustomButton from "../custom-button/Custom-button.component";
@@ -19,15 +19,12 @@ import {
 	ButtonContainer,
 } from "./signup.styles";
 
-const Signup = ({ register }) => {
+const Signup = ({ register, history }) => {
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
 		password: "",
 	}); //form initial state
-	const [redirect, setRedirect] = useState({
-		redirect: false,
-	}); //Redirect initial state
 
 	const { name, email, password } = formData;
 	//set the input values
@@ -37,21 +34,12 @@ const Signup = ({ register }) => {
 	//register user and set the redirect state to true and redirect to homepage
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		register({ name, email, password }); //register user
-		setRedirect({ redirect: true });
+		await register({ name, email, password }); //register user
+		history.push("/dashboard");
 	};
-	//redirect to homepage
-	const renderRedirect = () => {
-		if (redirect.redirect) {
-			return <Redirect to='/dashboard' />;
-		}
-		if (localStorage.token) {
-			return <Redirect to='/dashboard' />;
-		}
-	};
+
 	return (
 		<SignupContainer>
-			{renderRedirect()}
 			<Logo color='#515154' />
 			<LeftSignup>
 				<SignupHeading>Don't Have an Account Yet?</SignupHeading>
@@ -114,4 +102,4 @@ const Signup = ({ register }) => {
 	);
 };
 
-export default connect(null, { register })(Signup);
+export default withRouter(connect(null, { register })(Signup));

@@ -6,6 +6,8 @@ import {
 	DELETE_FAILED,
 	CREATE_TODO,
 	UPDATE_TODO,
+	TEMP_VALUE,
+	DELETE_TEMP,
 } from "./todos.types";
 const initialState = {
 	todos: [],
@@ -13,6 +15,7 @@ const initialState = {
 	error: {},
 	msg: [],
 	hidden: true,
+	temp: [],
 };
 
 export default function (state = initialState, action) {
@@ -42,7 +45,16 @@ export default function (state = initialState, action) {
 				loading: false,
 				msg: payload,
 			};
-
+		case TEMP_VALUE:
+			return {
+				...state,
+				temp: payload,
+			};
+		case DELETE_TEMP:
+			return {
+				...state,
+				temp: null,
+			};
 		default:
 			return state;
 	}

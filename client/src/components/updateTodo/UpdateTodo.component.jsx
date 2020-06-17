@@ -11,7 +11,10 @@ import {
 	DateLabel,
 } from "./updateTodo.styles";
 import { connect } from "react-redux";
-import { updateTodoAsync } from "../../redux/todos/todos.action";
+import {
+	updateTodoAsync,
+	asyncDeleteTemp,
+} from "../../redux/todos/todos.action";
 import { showHideUpdateTodo } from "../../redux/hidden/hidden.action";
 
 import PropTypes from "prop-types";
@@ -19,10 +22,10 @@ const UpdateTodo = ({
 	updateTodoAsync,
 	showHideUpdateTodo,
 	hidden,
-	id,
-	title,
-	deleteWhen,
+	temp,
+	asyncDeleteTemp,
 }) => {
+	const { title, id } = temp;
 	//initial state
 	const [state, setState] = useState({
 		todo: title,
@@ -42,11 +45,12 @@ const UpdateTodo = ({
 	};
 	//calling updateTodo action
 	const { todo, deleteAt } = state;
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const deleteWhen = deleteAt.toISOString();
-		updateTodoAsync({ todo, deleteWhen, id });
+		await updateTodoAsync({ todo, deleteWhen, id });
 		showHideUpdateTodo();
+		asyncDeleteTemp();
 	};
 	//setting hidden state to true to close the modal
 	const closePopup = (e) => {
@@ -97,10 +101,15 @@ const UpdateTodo = ({
 
 UpdateTodo.propTypes = {
 	updateTodoAsync: PropTypes.func.isRequired,
+	showHideUpdateTodo: PropTypes.func.isRequired,
+	asyncDeleteTemp: PropTypes.func.isRequired,
 };
 const mapStateToProp = (state) => ({
 	hidden: state.hidden,
+	temp: state.todos.temp,
 });
-export default connect(mapStateToProp, { updateTodoAsync, showHideUpdateTodo })(
-	UpdateTodo,
-);
+export default connect(mapStateToProp, {
+	updateTodoAsync,
+	showHideUpdateTodo,
+	asyncDeleteTemp,
+})(UpdateTodo);

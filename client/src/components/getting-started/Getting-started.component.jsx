@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import { ReactComponent as Background } from '../../assets/Vector1.svg';
 import { ReactComponent as Illustration } from "../../assets/to_do_list_2.svg";
 import CustomButton from "../custom-button/Custom-button.component";
 import Logo from "../logo/Logo.component";

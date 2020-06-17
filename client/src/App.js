@@ -5,64 +5,57 @@ import GettingStarted from "./components/getting-started/Getting-started.compone
 import SignUp from "./components/signup/Signup.component";
 import Login from "./components/login/Login.component";
 //route
-import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
-//Redux
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./redux/store";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import { loadUser } from "./redux/auth/auth.action";
 import setAuthToken from "./redux/auth/auth.util";
 import Dashboard from "./components/dashboard/Dashboard.component";
 
-const App = () => {
+const App = ({ loadUser, match }) => {
 	useEffect(() => {
 		if (localStorage.token) {
 			setAuthToken(localStorage.token);
-			store.dispatch(loadUser());
+			loadUser();
 			return () => <Redirect to='/dashboard' />;
 		}
-	}, []);
+	}, [loadUser]);
 
 	return (
-		<Provider store={store}>
-			<BrowserRouter>
-				<PersistGate persistor={persistor}>
-					<Switch>
-						<Route
-							exact
-							path='/'
-							render={() => {
-								if (localStorage.token) {
-									return <Redirect to='/dashboard' />;
-								}
-								return <GettingStarted />;
-							}}
-						/>
+		<Switch>
+			<Route
+				exact
+				path='/'
+				render={() => {
+					if (localStorage.token) {
+						return <Redirect to='/dashboard' />;
+					}
+					return <GettingStarted />;
+				}}
+			/>
 
-						<Route
-							path='/signup'
-							render={() => {
-								if (localStorage.token) {
-									return <Redirect to='/dashboard' />;
-								}
-								return <SignUp />;
-							}}
-						/>
-						<Route
-							path='/login'
-							render={() => {
-								if (localStorage.token) {
-									return <Redirect to='/dashboard' />;
-								}
-								return <Login />;
-							}}
-						/>
+			<Route
+				exact
+				path='/signup'
+				render={() => {
+					if (localStorage.token) {
+						return <Redirect to='/dashboard' />;
+					}
+					return <SignUp />;
+				}}
+			/>
+			<Route
+				exact
+				path='/login'
+				render={() => {
+					if (localStorage.token) {
+						return <Redirect to='/dashboard' />;
+					}
+					return <Login />;
+				}}
+			/>
 
-						<Route path='/dashboard' component={Dashboard} />
-					</Switch>
-				</PersistGate>
-			</BrowserRouter>
-		</Provider>
+			<Route path={`/dashboard`} component={Dashboard} />
+		</Switch>
 	);
 };
-export default App;
+export default withRouter(connect(null, { loadUser, setAuthToken })(App));

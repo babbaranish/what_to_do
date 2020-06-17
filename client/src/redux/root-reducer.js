@@ -7,7 +7,7 @@ import hiddenReducer from "./hidden/hidden.reducer";
 const persistConfig = {
 	key: "root",
 	storage,
-	whitelist: [""],
+	whitelist: ["auth", "todos"],
 };
 
 const rootReducer = combineReducers({

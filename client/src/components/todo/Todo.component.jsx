@@ -11,9 +11,12 @@ import {
 	Checkbox,
 	Input,
 } from "./todo.styles";
-import UpdateTodo from "../updateTodo/UpdateTodo.component";
+import {
+	changeTodo,
+	deleteTodoAsync,
+	asyncAddTemp,
+} from "../../redux/todos/todos.action";
 import { connect } from "react-redux";
-import { changeTodo, deleteTodoAsync } from "../../redux/todos/todos.action";
 import { showHideUpdateTodo } from "../../redux/hidden/hidden.action";
 const Todo = ({
 	title,
@@ -23,8 +26,8 @@ const Todo = ({
 	isChecked,
 	deleteTodoAsync,
 	showHideUpdateTodo,
-	updateHidden,
 	deleteAt,
+	asyncAddTemp,
 }) => {
 	const titleDate = new Date(deleteAt).toString().slice(0, 25);
 	const [state, setCheck] = useState({
@@ -49,13 +52,15 @@ const Todo = ({
 		e.preventDefault();
 		deleteTodoAsync({ id });
 	};
-	const handleUpdate = (e) => {
+
+	const handleUpdate = async (e) => {
 		e.preventDefault();
-		console.log(titleDate);
-		showHideUpdateTodo();
+		await asyncAddTemp({ title, id, deleteAt });
+		await showHideUpdateTodo();
 	};
 
 	const { isCompleted } = state;
+
 	return (
 		<TodoContainer>
 			<CheckboxContainer>
@@ -90,17 +95,13 @@ const Todo = ({
 					<i className='las la-trash-alt'></i>
 				</DeleteButton>
 			</DeleteContainer>
-			{updateHidden ? null : (
-				<UpdateTodo title={title} id={id} deleteWhen={deleteAt} />
-			)}
 		</TodoContainer>
 	);
 };
-const mapStateToProps = (state) => ({
-	updateHidden: state.hidden.updateHidden,
-});
-export default connect(mapStateToProps, {
+
+export default connect(null, {
 	changeTodo,
 	deleteTodoAsync,
 	showHideUpdateTodo,
+	asyncAddTemp,
 })(Todo);

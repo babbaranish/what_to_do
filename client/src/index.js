@@ -1,4 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-ReactDOM.render(<App />, document.getElementById("root"));
+import App from "./App"; //Redux
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
+import { BrowserRouter } from "react-router-dom";
+ReactDOM.render(
+	<Provider store={store}>
+		<BrowserRouter>
+			<PersistGate persistor={persistor}>
+				<App />
+			</PersistGate>
+		</BrowserRouter>
+	</Provider>,
+	document.getElementById("root"),
+);

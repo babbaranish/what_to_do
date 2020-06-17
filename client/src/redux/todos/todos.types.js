@@ -9,3 +9,5 @@ export const DELETE_TODO = "DELETE_TODO";
 export const DELETE_FAILED = "DELETE_FAILED";
 export const HIDE_TODO = "HIDE_TODO";
 export const UPDATE_TODO = "UPDATE_TODO";
+export const TEMP_VALUE = "TEMP_VALUE";
+export const DELETE_TEMP = "DELETE_TEMP";

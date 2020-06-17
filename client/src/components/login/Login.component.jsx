@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Logo from "../logo/Logo.component";
 //components
 import CustomButton from "../custom-button/Custom-button.component";
@@ -20,12 +20,11 @@ import {
 	LoginPara,
 } from "./login.styles";
 
-const Login = ({ login }) => {
+const Login = ({ login, history, match }) => {
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	}); //form initial state
-	const [redirect, setRedirect] = useState({ redirect: false });
 
 	const { email, password } = formData;
 	//set the input values
@@ -33,16 +32,10 @@ const Login = ({ login }) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 	//Login user and set the redirect state to true and redirect to homepage
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		login({ email, password }); //login user
-		setRedirect({ redirect: true });
-		if (localStorage.getItem("token")) {
-			return <Redirect to='/dashboard' />;
-		}
-		if (redirect.redirect) {
-			return <Redirect to='/dashboard' />;
-		}
+		await login({ email, password }); //login user
+		history.push("/dashboard");
 	};
 
 	return (
@@ -107,4 +100,4 @@ const Login = ({ login }) => {
 	);
 };
 
-export default connect(null, { login })(Login);
+export default withRouter(connect(null, { login })(Login));

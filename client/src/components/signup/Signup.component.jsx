@@ -20,21 +20,16 @@ import {
 } from "./signup.styles";
 
 const Signup = ({ register, history }) => {
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-		password: "",
-	}); //form initial state
+	const [email, setEmail] = useState(""); //form initial state
+	const [password, setPass] = useState("");
+	const [name, setName] = useState("");
+	const [mobile, setMobile] = useState("");
 
-	const { name, email, password } = formData;
-	//set the input values
-	const handleChange = (e) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
 	//register user and set the redirect state to true and redirect to homepage
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await register({ name, email, password }); //register user
+		console.log(name);
+		await register({ name, email, password, mobile }); //register user
 		history.push("/dashboard");
 	};
 
@@ -48,7 +43,7 @@ const Signup = ({ register, history }) => {
 					<FormInput
 						type='text'
 						name='name'
-						onChange={handleChange}
+						onChange={(e) => setName(e.target.value)}
 						value={name}
 						label='Name'
 						placeholder='Enter Your Name'
@@ -58,7 +53,7 @@ const Signup = ({ register, history }) => {
 						type='email'
 						name='email'
 						value={email}
-						onChange={handleChange}
+						onChange={(e) => setEmail(e.target.value)}
 						label='E-Mail'
 						placeholder='Enter Your E-Mail'
 						required
@@ -67,9 +62,19 @@ const Signup = ({ register, history }) => {
 						type='password'
 						name='password'
 						value={password}
-						onChange={handleChange}
+						onChange={(e) => setPass(e.target.value)}
 						label='Password'
 						placeholder='Enter Your Password'
+						required
+					/>
+					<FormInput
+						type='text'
+						name='email'
+						maxLength='10'
+						value={mobile}
+						onChange={(e) => setMobile(e.target.value)}
+						label='Mobile Number'
+						placeholder='Enter Your Mobile Number'
 						required
 					/>
 					<CustomButton

@@ -21,16 +21,9 @@ import {
 } from "./login.styles";
 
 const Login = ({ login, history, match }) => {
-	const [formData, setFormData] = useState({
-		email: "",
-		password: "",
-	}); //form initial state
+	const [email, setEmail] = useState(""); //form initial state
+	const [password, setPass] = useState("");
 
-	const { email, password } = formData;
-	//set the input values
-	const handleChange = (e) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
 	//Login user and set the redirect state to true and redirect to homepage
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -73,7 +66,7 @@ const Login = ({ login, history, match }) => {
 						type='email'
 						name='email'
 						value={email}
-						onChange={handleChange}
+						onChange={(e) => setEmail(e.target.value)}
 						label='E-Mail'
 						placeholder='Enter Your E-Mail'
 						required
@@ -82,7 +75,7 @@ const Login = ({ login, history, match }) => {
 						type='password'
 						name='password'
 						value={password}
-						onChange={handleChange}
+						onChange={(e) => setPass(e.target.value)}
 						label='Password'
 						placeholder='Enter Your Password'
 						required

@@ -20,7 +20,7 @@ const TodoSchema = mongoose.Schema(
 		},
 		deleteWhen: {
 			type: Date,
-			default: new Date(+new Date() + 24 * 60 * 60 * 1000),
+			default: new Date(),
 			required: true,
 		}, // you don't need to set this default, but I like it there for semantic clearness
 	},

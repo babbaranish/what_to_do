@@ -6,12 +6,27 @@ const auth = require("../../middlewares/auth");
  * !Express-Validator
  */
 const { check, validationResult } = require("express-validator");
+const accountSid = "AC7088c784503b2fda81989a0fcb14e34c";
+const authToken = "e3eff258a397c696d7c91d27f247de85";
+const client = require("twilio")(accountSid, authToken);
 /**
  * @PRIVATE_POST_API
  * ! api/todos
  * @description create new todo
  */
-
+// const notifiaction = (title, sendTime, now) => {
+// 	setTimeout(() => {
+// 		client.messages
+// 			.create({
+// 				from: "whatsapp:+14155238886",
+// 				body: `Your todo is going to be deleted in 60sec. : ${title}`,
+// 				to: "whatsapp:+919569922968",
+// 			})
+// 			.then((message) =>
+// 				console.log(`this is sent with ${message.sid} ID`),
+// 			);
+// 	}, sendTime - now - 60000);
+// };
 router.post(
 	"/",
 	auth,
@@ -29,10 +44,19 @@ router.post(
 				todo: req.body.todo,
 				deleteWhen: req.body.deleteWhen,
 			});
-			await newTodo.save();
+
+			const created = await newTodo.save();
 			res.json({
 				newTodo,
 			});
+			// if (created) {
+			// 	const temp = req.body.deleteWhen;
+			// 	const title = req.body.todo;
+			// 	const sendTime = new Date(`${temp}`).getTIme() * 1000 - 60000;
+			// 	const now = new Date().getTime() * 1000;
+			// 	notifiaction(title, sendTime, now);
+			// 	return;
+			// }
 		} catch (err) {
 			console.error(err.message);
 			res.status(500).send("server error");
@@ -182,4 +206,5 @@ router.patch("/:id", auth, async (req, res, next) => {
 		res.status(500).send("server error");
 	}
 });
+
 module.exports = router;

@@ -40,6 +40,7 @@ const CreateTodo = ({ createTodoAsync, hideTodo, hidden }) => {
 		e.preventDefault();
 		const deleteWhen = deleteAt.toISOString();
 		createTodoAsync({ todo, deleteWhen });
+
 		hideTodo();
 	};
 	//setting hidden state to true to close the modal

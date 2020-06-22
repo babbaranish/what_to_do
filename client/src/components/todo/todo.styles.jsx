@@ -8,6 +8,9 @@ export const TodoContainer = styled.div`
 	&:hover {
 		cursor: pointer;
 	}
+	@media only screen and (max-width: 500px) {
+		margin-right: 2em;
+	}
 `;
 
 export const TitleContainer = styled.div`
@@ -17,6 +20,7 @@ export const TitleContainer = styled.div`
 	font-weight: 400;
 	font-style: ${(props) => (props.isAuth ? `italic` : `none`)};
 	text-decoration: ${(props) => (props.isAuth ? "line-through" : "none")};
+	text-overflow: ellipsis;
 
 	&:hover {
 		/* font-weight: bold; */

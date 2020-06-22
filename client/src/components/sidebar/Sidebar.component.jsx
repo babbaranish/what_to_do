@@ -4,6 +4,7 @@ import {
 	SidebarContainer,
 	SidebarItemContainer,
 	SidebarItems,
+	ItemContainers,
 } from "./sidebar.styles";
 const Sidebar = ({ match }) => {
 	let location = useLocation();
@@ -25,15 +26,18 @@ const Sidebar = ({ match }) => {
 	return (
 		<SidebarContainer>
 			<SidebarItemContainer>
-				<SidebarItems style={all} to={`${match.path}`}>
-					All
-				</SidebarItems>
-				<SidebarItems style={pending} to={`${match.path}/pending`}>
-					Pending
-				</SidebarItems>
-				<SidebarItems style={completed} to={`${match.path}/completed`}>
-					Completed
-				</SidebarItems>
+				<ItemContainers style={all} to={`${match.path}`}>
+					<SidebarItems>All</SidebarItems>
+				</ItemContainers>
+				<ItemContainers style={pending} to={`${match.path}/pending`}>
+					<SidebarItems>Pending</SidebarItems>
+				</ItemContainers>
+				<ItemContainers
+					style={completed}
+					to={`${match.path}/completed`}
+				>
+					<SidebarItems>Completed</SidebarItems>
+				</ItemContainers>
 			</SidebarItemContainer>
 		</SidebarContainer>
 	);

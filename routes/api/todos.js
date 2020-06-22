@@ -9,24 +9,14 @@ const { check, validationResult } = require("express-validator");
 const accountSid = "AC7088c784503b2fda81989a0fcb14e34c";
 const authToken = "e3eff258a397c696d7c91d27f247de85";
 const client = require("twilio")(accountSid, authToken);
+const schedule = require("node-schedule");
+
 /**
  * @PRIVATE_POST_API
  * ! api/todos
  * @description create new todo
  */
-// const notifiaction = (title, sendTime, now) => {
-// 	setTimeout(() => {
-// 		client.messages
-// 			.create({
-// 				from: "whatsapp:+14155238886",
-// 				body: `Your todo is going to be deleted in 60sec. : ${title}`,
-// 				to: "whatsapp:+919569922968",
-// 			})
-// 			.then((message) =>
-// 				console.log(`this is sent with ${message.sid} ID`),
-// 			);
-// 	}, sendTime - now - 60000);
-// };
+
 router.post(
 	"/",
 	auth,
@@ -46,9 +36,32 @@ router.post(
 			});
 
 			const created = await newTodo.save();
+			if (created) {
+				const msgFullDate = new Date(req.body.deleteWhen);
+				const msgYear = msgFullDate.getFullYear();
+				const msgMonth = msgFullDate.getMonth();
+				const msgDate = msgFullDate.getDate();
+				const msgHour = msgFullDate.getHours();
+				const msgMin = msgFullDate.getMinutes();
+				const msgSec = msgFullDate.getSeconds();
+				const sendDate = new Date(
+					msgYear,
+					msgMonth,
+					msgDate,
+					msgHour,
+					msgMin,
+					msgSec,
+				);
+				console.log(created, sendDate.toLocaleString());
+
+				schedule.scheduleJob(sendDate, function () {
+					console.log("test");
+				});
+			}
 			res.json({
 				newTodo,
 			});
+
 			// if (created) {
 			// 	const temp = req.body.deleteWhen;
 			// 	const title = req.body.todo;
@@ -59,7 +72,7 @@ router.post(
 			// }
 		} catch (err) {
 			console.error(err.message);
-			res.status(500).send("server error");
+			return res.status(500).send("server error");
 		}
 	},
 );

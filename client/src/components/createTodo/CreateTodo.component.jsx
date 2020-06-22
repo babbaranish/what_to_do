@@ -39,6 +39,7 @@ const CreateTodo = ({ createTodoAsync, hideTodo, hidden }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const deleteWhen = deleteAt.toISOString();
+		console.log(deleteWhen);
 		createTodoAsync({ todo, deleteWhen });
 
 		hideTodo();

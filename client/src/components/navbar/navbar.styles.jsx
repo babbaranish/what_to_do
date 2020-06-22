@@ -14,11 +14,26 @@ export const LogoContainer = styled.div`
 	width: 25%;
 	margin: 0.7em 0 0 5em;
 	padding-left: 3em;
+	@media only screen and (max-width: 1200px) and (min-width: 500px) {
+		padding-left: 0em;
+		margin: 1.5em 0 0 3em;
+	}
+	@media only screen and (max-width: 500px) {
+		padding-left: 0em;
+		margin: 1.5em 0 0 0.71em;
+	}
 `;
 export const DashboardLogo = styled(Link)`
 	font-size: 2em;
 	color: #fff;
 	font-weight: bold;
+	@media only screen and (max-width: 1200px) and (min-width: 300px) {
+		font-size: 1em;
+	}
+	@media only screen and (max-width: 400px) {
+		padding: 0.11em;
+		font-size: 0.8em;
+	}
 `;
 
 export const NavbarItems = styled.div`
@@ -29,6 +44,9 @@ export const NavbarItems = styled.div`
 	font-size: 1.5em;
 	color: ghostwhite;
 	flex-basis: 80%;
+	@media only screen and (max-width: 800px) and (min-width: 300px) {
+		margin: 0;
+	}
 `;
 
 export const NavbarSearch = styled.input`
@@ -54,6 +72,12 @@ export const NavbarSearch = styled.input`
 		letter-spacing: 2px;
 		margin: 2em;
 		padding: 1em;
+	}
+	@media only screen and (max-width: 1200px) and (min-width: 800px) {
+		width: 30vh;
+	}
+	@media only screen and (max-width: 800px) and (min-width: 300px) {
+		width: 20vh;
 	}
 `;
 

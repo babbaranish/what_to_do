@@ -18,15 +18,44 @@ export const SidebarItemContainer = styled.ul`
 	list-style: none;
 	display: flex;
 	flex-direction: column;
+
+	@media only screen and (max-width: 1200px) and (min-width: 900px) {
+		padding-top: 4em;
+		font-size: 1.3em;
+	}
+	@media only screen and (max-width: 900px) and (min-width: 500px) {
+		padding-top: 5em;
+		font-size: 1em;
+	}
+	@media only screen and (max-width: 500px) and (min-width: 300px) {
+		padding-top: 5em;
+		font-size: 1em;
+	}
 `;
-export const SidebarItems = styled(Link)`
+export const ItemContainers = styled(Link)`
+	display: flex;
+	justify-content: center;
+	margin-top: 0.81em;
+	border-radius: 50px;
+	background-color: #9492de;
+	margin-top: 1.2em;
+`;
+export const SidebarItems = styled.div`
 	text-transform: uppercase;
 	font-weight: 400;
-	border-radius: 50px;
-	margin-top: 1.2em;
+
 	text-align: center;
 	cursor: pointer;
 	padding: 0.5em 0em 0.5em;
-	background-color: #9492de;
-	width: 10em;
+	width: 9em;
+	@media only screen and (max-width: 1200px) and (min-width: 900px) {
+		width: 7em;
+		font-size: 1em;
+	}
+	@media only screen and (max-width: 900px) and (min-width: 500px) {
+		width: 6em;
+	}
+	@media only screen and (max-width: 500px) and (min-width: 300px) {
+		width: 5em;
+	}
 `;

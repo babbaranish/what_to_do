@@ -5,9 +5,12 @@ const auth = require("../../middlewares/auth");
 /**
  * !Express-Validator
  */
-const { check, validationResult } = require("express-validator");
+const {
+	check,
+	validationResult
+} = require("express-validator");
 const accountSid = "AC7088c784503b2fda81989a0fcb14e34c";
-const authToken = "e3eff258a397c696d7c91d27f247de85";
+const authToken = "0aca977ed1ac3a572f7e57dc2b0eb3cf";
 const client = require("twilio")(accountSid, authToken);
 const schedule = require("node-schedule");
 
@@ -42,7 +45,7 @@ router.post(
 				const msgMonth = msgFullDate.getMonth();
 				const msgDate = msgFullDate.getDate();
 				const msgHour = msgFullDate.getHours();
-				const msgMin = msgFullDate.getMinutes();
+				const msgMin = msgFullDate.getMinutes() - 1;
 				const msgSec = msgFullDate.getSeconds();
 				const sendDate = new Date(
 					msgYear,
@@ -55,21 +58,19 @@ router.post(
 				console.log(created, sendDate.toLocaleString());
 
 				schedule.scheduleJob(sendDate, function () {
-					console.log("test");
+					client.messages
+						.create({
+							body: `Your Todo will be Deleted after 1min of Title:  ${req.body.todo}`,
+							from: "whatsapp:+14155238886",
+							to: "whatsapp:+919569922968",
+						})
+						.then((message) => console.log(message.sid))
+						.catch((err) => console.err(err))
 				});
 			}
 			res.json({
 				newTodo,
 			});
-
-			// if (created) {
-			// 	const temp = req.body.deleteWhen;
-			// 	const title = req.body.todo;
-			// 	const sendTime = new Date(`${temp}`).getTIme() * 1000 - 60000;
-			// 	const now = new Date().getTime() * 1000;
-			// 	notifiaction(title, sendTime, now);
-			// 	return;
-			// }
 		} catch (err) {
 			console.error(err.message);
 			return res.status(500).send("server error");
@@ -160,17 +161,14 @@ router.put(
 		}
 		try {
 			const toDoId = req.params.id;
-			const todo = await Todo.findOneAndUpdate(
-				{
-					_id: toDoId,
+			const todo = await Todo.findOneAndUpdate({
+				_id: toDoId,
+			}, {
+				$set: {
+					todo: req.body.todo,
+					deleteWhen: req.body.deleteWhen,
 				},
-				{
-					$set: {
-						todo: req.body.todo,
-						deleteWhen: req.body.deleteWhen,
-					},
-				},
-			);
+			}, );
 			if (!todo) {
 				return res.status(400).json({
 					msg: "No todo found",
@@ -195,17 +193,14 @@ router.put(
 router.patch("/:id", auth, async (req, res, next) => {
 	try {
 		const toDoId = req.params.id;
-		const todo = await Todo.findOneAndUpdate(
-			{
-				_id: toDoId,
+		const todo = await Todo.findOneAndUpdate({
+			_id: toDoId,
+		}, {
+			$set: {
+				isCompleted: req.body.isCompleted,
+				isActive: req.body.isActive,
 			},
-			{
-				$set: {
-					isCompleted: req.body.isCompleted,
-					isActive: req.body.isActive,
-				},
-			},
-		);
+		}, );
 		if (!todo) {
 			return res.status(400).json({
 				msg: "No todo found",

@@ -11,9 +11,9 @@ import { connect } from "react-redux";
 import UpdateTodo from "../updateTodo/UpdateTodo.component";
 
 const Dashboard = ({ auth, match, updateHidden }) => {
-	const [width, setWidth] = React.useState(window.innerWidth);
+	const [width, setWidth] = useState(window.innerWidth);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		window.addEventListener("resize", updateWitdh);
 		return () => window.removeEventListener("resize", updateWitdh);
 	});
@@ -21,7 +21,7 @@ const Dashboard = ({ auth, match, updateHidden }) => {
 	const updateWitdh = () => {
 		setWidth(window.innerWidth);
 	};
-	const { path } = match;
+
 
 	return (
 		<DashboardContainer>
@@ -36,7 +36,7 @@ const Dashboard = ({ auth, match, updateHidden }) => {
 					if (auth) {
 						return <Alltodos />;
 					} else {
-						return <Redirect to='/login' />;
+						return <Redirect to="/login" />;
 					}
 				}}
 			/>
@@ -46,7 +46,7 @@ const Dashboard = ({ auth, match, updateHidden }) => {
 					if (auth) {
 						return <CompletedTodos />;
 					} else {
-						return <Redirect to='/login' />;
+						return <Redirect to="/login" />;
 					}
 				}}
 			/>
@@ -56,18 +56,18 @@ const Dashboard = ({ auth, match, updateHidden }) => {
 					if (auth) {
 						return <PendingTodos />;
 					} else {
-						return <Redirect to='/login' />;
+						return <Redirect to="/login" />;
 					}
 				}}
 			/>
 			<Route
 				exact
-				path='/dashboard/settings'
+				path="/dashboard/settings"
 				render={() => {
 					if (auth) {
 						return <UserSettings />;
 					} else {
-						return <Redirect to='/login' />;
+						return <Redirect to="/login" />;
 					}
 				}}
 			/>
